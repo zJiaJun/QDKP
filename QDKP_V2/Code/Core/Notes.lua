@@ -39,17 +39,19 @@ local function ExtractNum(str, keys)
 end
 ----------------------------------------------------------------------
 
-function QDKP2_MakeNote(incNet, incTotal, incSpent, incHours)
+function QDKP2_MakeNote(incNet, incTotal, incSpent, incHours, allHis)
 --puts the data back into a note
 
   incNet=RoundNum(incNet)
   incTotal=RoundNum(incTotal)
   incSpent=RoundNum(incSpent)
   incHours=RoundNum(incHours*10)/10
+  allHis=RoundNum(allHis)
 
   local out=''
-  local netLabel='Net'
-  local optLabel, optValue='Tot', incTotal
+  local netLabel='当前'
+  local optLabel, optValue='总计', incTotal
+  local hisLbael, hisValue='历史', allHis
   local hrsLabel='Hrs'
   if QDKP2_TotalOrSpent==2 then
     optLabel = 'Spt'
@@ -72,7 +74,7 @@ function QDKP2_MakeNote(incNet, incTotal, incSpent, incHours)
   elseif incHours<0 then incHours='0'
   end
 
-  local out=netLabel..QDKP2_NOTE_DASH..tostring(incNet)..QDKP2_NOTE_BREAK..optLabel..QDKP2_NOTE_DASH..tostring(optValue)
+  local out=netLabel..QDKP2_NOTE_DASH..tostring(incNet)..QDKP2_NOTE_BREAK..optLabel..QDKP2_NOTE_DASH..tostring(optValue)..QDKP2_NOTE_BREAK..hisLbael..QDKP2_NOTE_DASH..tostring(hisValue)
   if QDKP2_StoreHours then
     out=out..QDKP2_NOTE_BREAK..hrsLabel..QDKP2_NOTE_DASH..tostring(incHours)
   end

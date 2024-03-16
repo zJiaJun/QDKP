@@ -59,11 +59,11 @@ end
 function QDKP2_GetSpent(name, doNotReset)
   name=QDKP2_GetMain(name)
   if not QDKP2rankIndex[name] then
-    QDKP2_Debug(1,"Core","Asked total DKP of "..tostring(name).." but he's not in guild.")
+    QDKP2_Debug(1,"Core","Asked spent DKP of "..tostring(name).." but he's not in guild.")
     return 0
   end
   if not QDKP2note[name] then
-    QDKP2_Debug(1,"Core","Asked total DKP of "..tostring(name).." but he has not DKP values?!?!?")
+    QDKP2_Debug(1,"Core","Asked spent DKP of "..tostring(name).." but he has not DKP values?!?!?")
     GuildRoster()
     return 0
   end
@@ -86,19 +86,15 @@ end
 function QDKP2_GetHours(name, doNotReset)
   name=QDKP2_GetMain(name)
   if not QDKP2rankIndex[name] then
-    QDKP2_Debug(1,"Core","Asked total DKP of "..tostring(name).." but he's not in guild.")
-    return 0
-  end
-  if not QDKP2note[name] then
-    QDKP2_Debug(1,"Core","Asked total DKP of "..tostring(name).." but he has not DKP values?!?!?")
-    GuildRoster()
-    return 0
-  end
-  if not QDKP2note[name] then
     QDKP2_Debug(1,"Core","Asked hours of "..tostring(name).." but he's not in guild.")
+    return 0
+  end
+  if not QDKP2note[name] then
+    QDKP2_Debug(1,"Core","Asked hours of "..tostring(name).." but he has not DKP values?!?!?")
     GuildRoster()
     return 0
   end
+ 
   local Hours=QDKP2note[name][QDKP2_HOURS]
   if not Hours then
         QDKP2_Debug(1, "Core","Error while getting Hours amount for "..name..". Doesn't have a valid data array,")
@@ -109,6 +105,25 @@ function QDKP2_GetHours(name, doNotReset)
 	end
   end
   return Hours
+end
+
+function QDKP2_GetAllHis(name, doNotReset)
+  name=QDKP2_GetMain(name)
+  if not QDKP2rankIndex[name] then
+    QDKP2_Debug(1,"Core","Asked all histroy DKP of "..tostring(name).." but he's not in guild.")
+    return 0
+  end
+  if not QDKP2note[name] then
+    QDKP2_Debug(1,"Core","Asked all histroy DKP of "..tostring(name).." but he has not DKP values?!?!?")
+    GuildRoster()
+    return 0
+  end
+  local AllHis=QDKP2note[name][QDKP2_ALLHIS]
+  if not AllHis then
+        QDKP2_Debug(1, "Core","Error while getting all histroy amount for "..name..". Doesn't have a valid data array,")
+	if doNotReset then Hours=0 end
+  end
+  return AllHis
 end
 
 

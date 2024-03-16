@@ -425,10 +425,14 @@ function QDKP2_UpdateNoteByName(name, indexList)
     local spent = QDKP2_GetSpent(name)
     local net = total - spent
     local hours = QDKP2_GetHours(name)
+	local allHis = QDKP2_GetAllHis(name)
+	QDKP2_Debug(3,"Core","Updating DKP note of "..name.." total="..tostring(total)..", spent="..tostring(spent)..", net="..tostring(net)..", allHis="..tostring(allHis))
+
+
     if QDKP2_IsExternal(name) then
       QDKP2log_ConfirmEntries(name,true)
     end
-    local result = QDKP2_SetDKPNote(index, net, total, spent, hours)
+    local result = QDKP2_SetDKPNote(index, net, total, spent, hours, allHis)
     if result then QDKP2_ModifiedPlayers[name]=true; end
     return result
   else
@@ -441,8 +445,8 @@ end
 
 
 --This fucntion will set a note given index and note parameters
-function QDKP2_SetDKPNote(index, net, total, spent, hours)
-  local output = QDKP2_MakeNote(net, total, spent, hours)
+function QDKP2_SetDKPNote(index, net, total, spent, hours, allHis)
+  local output = QDKP2_MakeNote(net, total, spent, hours, allHis)
   if index then
     QDKP2_GuildRosterSetDatafield(index, output)
     return true
