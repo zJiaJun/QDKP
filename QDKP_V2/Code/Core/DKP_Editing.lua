@@ -204,6 +204,7 @@ function QDKP2_AddTotals(name, award, spent, hours, reason, noMsgIt, timestamp, 
   if award then Gain=Gain + award; end
   if spent then Gain=Gain - spent; end
   local newNet=Net+Gain
+  local awardHis=Gain
   if (newNet>QDKP2_MAXIMUM_NET) then
     if not award then award=0; end
     award=award-(newNet-QDKP2_MAXIMUM_NET )
@@ -267,6 +268,12 @@ function QDKP2_AddTotals(name, award, spent, hours, reason, noMsgIt, timestamp, 
       end
       QDKP2note[name][QDKP2_HOURS] = newHours
       HaveModify = true
+    end
+  end
+  if awardHis then
+    if awardHis ~= 0 then
+      local allHis = awardHis + oldTotal
+      QDKP2note[name][QDKP2_ALLHIS] = allHis
     end
   end
 

@@ -53,6 +53,7 @@ QDKP2_COLOR_CLOSE  = "|r";
 QDKP2_TOTAL=1
 QDKP2_SPENT=2
 QDKP2_HOURS=3
+QDKP2_ALLHIS=5
 
 ---------------------------GLOBALS/FLAGS INIT------------------------------
 
@@ -67,6 +68,7 @@ QDKP2_EID = 0
 QDKP2_TOTAL=1
 QDKP2_SPENT=2
 QDKP2_HOURS=3
+QDKP2_ALLHIS=5
 
 QDKP2_outputstyle=4
 
